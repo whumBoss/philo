@@ -1,0 +1,70 @@
+#include "../../header/header.h"
+
+static int	get_philos_strated(t_philo **philo)
+{
+	t_data	*data;
+	int	i;
+
+	i = 0;
+	data = philo[i]->data;
+	data->start_time = get_time_of_day();
+	while (i < data->nb_philo)
+	{
+		if (pthread_create(philo[i]->philo, NULL, philo_routine, philo[i]) != 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	init_philos_mutex(t_philo **philo)
+{
+	t_data	*data;
+	int		i;
+
+	i = 0;
+	data = philo[i]->data;
+	while (i < data->nb_philo)
+	{
+		if (pthread_mutex_init(&philo[i]->death_lock, NULL))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	begin_philo(t_philo **philo)
+{
+	if (!init_philos_mutex(philo))
+		return (0);
+	//print_philo(philo);
+	if (!get_philos_started(philo))
+		return (0);
+	return (1);
+}
+
+t_philo	**init_philo(t_data *data)
+{
+	t_philo	**philo;
+	int	i;
+
+	i = 0;
+	philo = malloc(sizeof(t_philo *)* data->nb_philo);
+	if (!philo)
+		return (NULL);
+	while (i < data->nb_philo)
+	{
+		philo[i] = malloc(sizeof(t_philo));
+		if (!philo[i])
+			return (NULL);
+		philo[i]->data = data;
+		philo[i]->id = i + 1;
+		philo[i]->left_fork = &data->lock_forks[i];
+		philo[i]->right_fork = &data->lock_forks[(i + 1) % data->nb_philo];
+		if (data->nb_philo == 1)
+			philo[i]->right_fork = NULL;
+		i++;
+	}
+	return (philo);
+}
+
