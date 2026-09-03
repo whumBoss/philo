@@ -48,3 +48,13 @@
 //	- partir du lancement des philos, passer a la fonction routine et avancer sur sur toutes fonctions qui suivent pour que l'exec des philos soit complete (en psuedo code deja)
 //	- revenir sur begin monitor et la routine monitor, verif ce qui manque et pseudo coder.
 //	- verif les fichier init pour initialiser les param ajouter en dernier
+//
+//	=== 02 sept mer ===
+//
+//	avancement sur eating, print actions et clear un peu
+//	prochaine etapes : tester make
+//
+//	=== 03 sept jeu ===
+//
+//	fini clear, makefile doesn't work, taking fork done.
+//	prochaine etape : regler le pb du makefile et faire update_value

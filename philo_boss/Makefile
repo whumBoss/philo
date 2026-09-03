@@ -32,7 +32,7 @@ SRCS = \
 	$(addprefix $(MAIN_DIR),$(MAIN_FILES)) \
 	$(addprefix $(PARSING_DIR),$(PARSING_FILES)) \
 	$(addprefix $(EXEC_DIR),$(EXEC_FILES)) \
-	$(addprefix $(UTILS_DIR),$(UTILS_FILES)) \
+	$(addprefix $(UTILS_DIR),$(UTILS_FILES))
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

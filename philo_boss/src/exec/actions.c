@@ -42,7 +42,7 @@ static int	taking_forks(t_philo *philo)
 	if (!philo->left_fork && data->nb_philo == 1 )
 	{
 		custom_sleep(data, data->time_die);
-		// QUESTION : quand est ce qu'on dis qu'il est mort??
+		philo->dead = 1; // Pour indiquer qu'il est mort
 		pthread_mutex_unlock(philo->right_fork);
 		return(0);
 		// QUESTION : donc il a pas reussis a manger, il a attendus le temps de mourrir, quand est ce qu'il meurs pour de vrai??

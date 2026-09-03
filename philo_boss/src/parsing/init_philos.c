@@ -63,6 +63,7 @@ t_philo	**init_philo(t_data *data)
 		philo[i]->data = data;
 		philo[i]->id = i + 1;
 		philo[i]->nb_meal_eaten = 0;
+		philo[i]->dead = 0;
 		philo[i]->right_fork = &data->lock_forks[i];
 		if (data->nb_philo != 1)
 			philo[i]->left_fork = &data->lock_forks[(i + 1) % data->nb_philo];

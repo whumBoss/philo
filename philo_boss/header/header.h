@@ -38,6 +38,7 @@ typedef struct s_philo
 	t_data			*data;
 	int				id;
 	int				nb_meal_eaten;
+	int				dead;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	lock_nb_meal_eaten;
