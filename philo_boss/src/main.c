@@ -29,5 +29,7 @@ int	main(int ac, char **av)
 
 	// QUESTION : Les return value des threads on les recupere jamais? On est pas cense renvoyer un exit code different selon si les philos ont bien manger ou si un philo est dead? when, where, why?????
 	//
+	clear_everything(philo);
+
 	return (0);
 }

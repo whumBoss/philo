@@ -1,42 +1,50 @@
 #include "../../header/header.h"
+#include <pthread.h>
 
 //		=== CLEAR === 
 // on clear tout soit wait les threads philos, destroy les mutex et free les philos
 
 static void	clear_philos(t_philo **philos)
 {
-	int	
-	while (i < nb_philo)
+	int		i;
+	t_data	*data;
+
+	i = 0;
+	data = philos[i]->data;
+	while (i < data->nb_philo)
 	{
-		join threads philo[i]
+		pthread_join(philos[i]->philo, NULL);
 		i++;
 	}
-	i = 0
-	while (i < nb_philo)
+	i = 0;
+	while (i < data->nb_philo)
 	{
-		destroy philo[i] mutex sauf forks
-		free(philo[i])
+		pthread_mutex_destroy(&philos[i]->lock_nb_meal_eaten);
+		pthread_mutex_destroy(&philos[i]->death_lock);
+		free(philos[i]);
 		i++;
 	}
-	free(philo);
+	free(philos);
 }
 
-/*
-static clear_data
+static void	clear_data(t_data *data)
 {
-	while (i < nb_philo)
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
 	{
-		destroy mutex fork[i]
+		pthread_mutex_destroy(&data->lock_forks[i]);
 		i++;
 	}
-	destroy data's mutex
+	pthread_mutex_destroy(&data->lock_print);
+	pthread_mutex_destroy(&data->lock_end_prog);
 }
-*/
 
 int	clear_everything(t_philo **philos)
 {
-	clear_philos(); // if??
-	clear_data(); // if??
+	clear_philos(philos); // if??
+	clear_data(philos[0]->data); // if??
 	return (1); //ou exit (?)
 }
 
