@@ -70,14 +70,18 @@ int		eating(t_philo *philo);
 
 // == UTILS ==
 
-//	utils.c
+//	utils_gen.c
 void	custom_sleep(t_data *data, size_t sleep_time);
 long	get_time_of_day(void);
 int		ft_strlen(const char *str);
 long	ft_atol(const char *nptr);
+int		ft_atoi(const char *str);
 
-//	value_utils.c
+//	utils_value.c
 int	read_value(pthread_mutex_t *mutex, int *value);
+
+//	clear.c
+int	clear_everything(t_philo **philos);
 
 //	test.c
 void	print_data(t_data data);

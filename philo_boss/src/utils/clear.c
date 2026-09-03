@@ -1,8 +1,11 @@
-/* 
-on clear tout soit wait les threads philos, destroy les mutex et free les philos
+#include "../../header/header.h"
 
-static clear_philos
+//		=== CLEAR === 
+// on clear tout soit wait les threads philos, destroy les mutex et free les philos
+
+static void	clear_philos(t_philo **philos)
 {
+	int	
 	while (i < nb_philo)
 	{
 		join threads philo[i]
@@ -18,6 +21,7 @@ static clear_philos
 	free(philo);
 }
 
+/*
 static clear_data
 {
 	while (i < nb_philo)
@@ -27,11 +31,12 @@ static clear_data
 	}
 	destroy data's mutex
 }
-
-clear_everything
-{
-	clear_philos if??
-	clear_data if??
-	return (?) ou exit (?)
-}
 */
+
+int	clear_everything(t_philo **philos)
+{
+	clear_philos(); // if??
+	clear_data(); // if??
+	return (1); //ou exit (?)
+}
+
