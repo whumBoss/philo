@@ -1,5 +1,4 @@
-#include "../header/header.h"
-#include <stdio.h>
+#include "header.h"
 
 void	print_data(t_data data)
 {
@@ -9,7 +8,7 @@ void	print_data(t_data data)
 	printf("data.time_die = %ld\n", data.time_die);
 	printf("data.time_eat = %ld\n", data.time_eat);
 	printf("data.time_sleep = %ld\n", data.time_sleep);
-	printf("data.nb_meal_per_philo = %ld\n", data.nb_meal_per_philo);
+	printf("data.nb_meal_per_philo = %d\n", data.nb_meal_per_philo);
 	printf("--------------------\n");
 }
 

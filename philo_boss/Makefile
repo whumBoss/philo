@@ -13,7 +13,7 @@ OBJ_DIR = objs
 # ===== Toolchain =====
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-CPPFLAGS = -I. -Iincludes -MMD -MP
+CPPFLAGS = -I. -Iheader -MMD -MP
 #CPPFLAGS = -I. -Iincludes -Iincludes/ft_print -Ilibft -MMD -MP
 
 # ===== Source Layout =====
@@ -22,7 +22,7 @@ PARSING_DIR = src/parsing/
 EXEC_DIR = src/exec/
 UTILS_DIR = src/utils/
 
-MAIN_FILES = main.c utils.c test.c
+MAIN_FILES = main.c
 PARSING_FILES = init_data.c init_philos.c
 EXEC_FILES = actions.c monitor.c philo.c
 UTILS_FILES = clear.c test.c utils_gen.c utils_value.c

@@ -39,9 +39,11 @@ typedef struct s_philo
 	int				id;
 	int				nb_meal_eaten;
 	int				dead;
+	long			last_meal_time_ago;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	lock_nb_meal_eaten;
+	pthread_mutex_t	lock_last_meal_time_ago;
 	pthread_mutex_t	death_lock;
 } t_philo;
 
@@ -79,7 +81,10 @@ long	ft_atol(const char *nptr);
 int		ft_atoi(const char *str);
 
 //	utils_value.c
-int	read_value(pthread_mutex_t *mutex, int *value);
+void	update_value(pthread_mutex_t *mutex, int *value);
+int		read_value(pthread_mutex_t *mutex, int *value);
+void	update_last_meal(t_philo *philo);
+
 
 //	clear.c
 int	clear_everything(t_philo **philos);
@@ -92,8 +97,7 @@ void	print_philo(t_philo **philo);
 
 
 //VALUE UTILS:
-// update_value();
-// update_last_meal();
+// read_last_meal()
 //
 // ACTIONS:
 // eating();

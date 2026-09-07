@@ -19,7 +19,7 @@ static int	print_action(t_philo *philo, char *str)
 
 	//ecrire
 	pthread_mutex_lock(&data->lock_print);
-	printf("%ld : philo %d %s", time, philo->id, str);
+	printf("%ld : philo %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&data->lock_print);
 
 	return (1);
@@ -77,10 +77,11 @@ int	eating(t_philo *philo)
 	print_action(philo, "is eating");
 
 	// unknown for now
-	//update_last_meal(? , ?);
+	update_last_meal(philo);
 
 	// update le nb de meal que le philo a manger
-	//update_value();
+	update_value(&philo->lock_nb_meal_eaten, &philo->nb_meal_eaten);
+
 
 	// custom sleep le temps du repas, pour rester lock durant tout ce temps
 	custom_sleep(data, data->time_eat);
@@ -88,7 +89,8 @@ int	eating(t_philo *philo)
 	// unlock les fourchettes
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
-
+	print_action(philo, "unlock the fork"); // --> a suppr
+	
 	return (1);
 }
 

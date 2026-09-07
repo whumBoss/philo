@@ -58,3 +58,9 @@
 //
 //	fini clear, makefile doesn't work, taking fork done.
 //	prochaine etape : regler le pb du makefile et faire update_value
+//
+//	=== 04 sept ven ===
+//
+//	makefile working, update value et last meal
+//	prochaine etape : tester eating, mettre le monitor en marche
+//	pour voir comment ca se passe avec juste eating et monitor
