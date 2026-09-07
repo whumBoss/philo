@@ -94,14 +94,28 @@ int	eating(t_philo *philo)
 	return (1);
 }
 
-/*
-int	thinking()
+
+int	thinking(t_philo *philo)
 {
+	t_data	*data;
+	data = philo->data;
+//	si on lis stop (donc c'est vrai quoi)
+//		return (0); // erreur!
+//	print action ""
+//	custom_sleep(data, time_to_sleep);
+//	return (1); // good!
+//}
 
-}
+//int	sleeping(le philo)
+//{
+//	recup data
+//	si on lis stop (donc c'est vrai quoi)
+//		return (0); // erreur!
+//	print action ""
+//	// why on sleep bizzarement???
+//	si nb_philo % 2 != 0 // si c'eat un nb impair de philo
+//		custom_sleep(data, 100);
+//	return (1); // good!
 
-int	sleeping()
-{
+//}
 
-}
-*/
