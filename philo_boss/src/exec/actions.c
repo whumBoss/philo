@@ -2,7 +2,7 @@
 
 //		=== ACTIONS ===
 
-static int	print_action(t_philo *philo, char *str)
+int	print_action(t_philo *philo, char *str)
 {
 	//assigner data dans data
 	t_data	*data;

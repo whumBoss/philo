@@ -1,44 +1,57 @@
-/*		=== MONITOR ===
-le thread monitor est lancer sur sa routine et on le wait
+#include "../../header/header.h"
 
-static check_data
+//		=== MONITOR ===
+//le thread monitor est lancer sur sa routine et on le wait
+
+static void	check_philo(t_philo *philo)
 {
+	t_data	*data;
+
+	data = philo->data;
 	// met a jour les infos concernant la mort du philo ou la fin de tout les repas du philo, soit si ce philo est termine ou pas encore
-	si le last_meal_time_ago() >= time_to_die
-		update_value(philo->dead_lock, philo->dead)
-	si le philo_eaten_all_meal()
-		data->philo_finish_eaten_count;
+	if (last_meal_time_ago(philo) >= data->time_die)
+		update_value(philo->death_lock, philo->dead)
+	if (philo_eaten_all_meal(philo))
+		data->philo_finish_eaten_count++;
 }
 
-static routine_monitor(void arg)
+static void routine_monitor(void *arg)
 {
-	recast l'arg
-	custom sleep monitor but whyyyyyyyyyyyyy?
+	t_philo	**philo;
+	t_data	*data;
+	int		i;
+
+	philo = (t_philo **)arg;
+	data = philo[0]->data;
+//	custom sleep monitor but whyyyyyyyyyyyyy?
 	while (1)
 	{
-		i = 0 on remet i a zero pour re-check tout les philo a chaque boucle
-		while (i < nb_philo)
+		i = 0; // on remet i a zero pour re-check tout les philo a chaque boucle
+		while (i < data->nb_philo)
 		{
-			check_philo => met a jour les valeur concernant les repas ou la mort du philo
+			check_philo(philo[i]); //=> met a jour les valeur concernant les repas ou la mort du philo
 			// si le philo est mort ou ils ont tous fini de manger, on met le flag stop dans data et on sors de la petite boucle
-			if (le philo est mort(philo[i]) || les philos on tous manger(philo[i], data->philo_finish_eaten_count))
+ 			if (philo_is_dead(philo[i]) || philos_finished(philo[i], data->philo_finish_eaten_count))
 			{
-				update_value(data->stop_lock?, data->stop?)
-				break; => la petite boucle
+				update_value(data->lock_end_prog, data->end_prog);
+				break; // => la petite boucle
 			}
+			i++;
 		}
-		sleep => whyyyyyyyyyyyyy?????
+//		sleep //=> whyyyyyyyyyyyyy?????
 		// si le flag stop est vrai, on stop la grande boucle, soit on termine le thread monitor, donc fin de programme
-		if (data->stop)
-			break; => la grande boucle
+		if (data->end_prog)
+			break; // => la grande boucle
 	}
-	return (NULL) => why? pas d'exit code necessaire?
+	return (NULL); // => why? pas d'exit code necessaire?
 }
 
-begin_monitor(data, **philo)
+
+int	begin_monitor(t_data *data, t_philo **philo)
 {
-	pthread_create(monitor, routine_monitor, **philo);
-	pthread_join(monitor);
+	if (pthread_create(&data->monitor, NULL, routine_monitor, **philo) != 0)
+		return (0);
+	pthread_join(data->monitor, NULL);
+	return (1);
 }
 
-*/

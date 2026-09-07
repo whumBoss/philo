@@ -57,10 +57,18 @@
 //	=== 03 sept jeu ===
 //
 //	fini clear, makefile doesn't work, taking fork done.
+//	
 //	prochaine etape : regler le pb du makefile et faire update_value
 //
 //	=== 04 sept ven ===
 //
 //	makefile working, update value et last meal
+//
 //	prochaine etape : tester eating, mettre le monitor en marche
-//	pour voir comment ca se passe avec juste eating et monitor
+//	 pour voir comment ca se passe avec juste eating et monitor
+//
+//	 === 07 sept lun ===
+//
+//	fonctions du monitor casi fini avec les utils du monitor aussi 
+//	prochaine etape : thinking et sleeping, verif toutes les fonctions dans lesquels j'ai des qst ou de commentaires et tester le prog
+//

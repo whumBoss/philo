@@ -38,12 +38,13 @@ typedef struct s_philo
 	t_data			*data;
 	int				id;
 	int				nb_meal_eaten;
+	int				finished_eaten;
 	int				dead;
-	long			last_meal_time_ago;
+	long			last_meal_time;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	lock_nb_meal_eaten;
-	pthread_mutex_t	lock_last_meal_time_ago;
+	pthread_mutex_t	lock_last_meal_time;
 	pthread_mutex_t	death_lock;
 } t_philo;
 
@@ -65,11 +66,15 @@ t_philo	**init_philo(t_data *data);
 void	*philo_routine(void *arg);
 
 // exec/actions.c
+int	print_action(t_philo *philo, char *str);
 int		eating(t_philo *philo);
+// sleeping();
+// thinking();
 
 
 // exec/monitor.c
-
+int	begin_monitor(t_data *data, t_philo **philo);
+// static routine_monitor();
 
 // == UTILS ==
 
@@ -84,6 +89,13 @@ int		ft_atoi(const char *str);
 void	update_value(pthread_mutex_t *mutex, int *value);
 int		read_value(pthread_mutex_t *mutex, int *value);
 void	update_last_meal(t_philo *philo);
+long	read_last_meal(t_philo *philo);
+
+//	utils_monitor.c
+// last_meal_time_ago();
+// philo_eaten_all_meal();
+// philos_finished();
+// philo_is_dead();
 
 
 //	clear.c
@@ -92,35 +104,5 @@ int	clear_everything(t_philo **philos);
 //	test.c
 void	print_data(t_data data);
 void	print_philo(t_philo **philo);
-
-
-
-
-//VALUE UTILS:
-// read_last_meal()
-//
-// ACTIONS:
-// eating();
-// sleeping();
-// thinking();
-//
-// ACTIONS UTILS:
-// print_action();
-// taking_forks();
-//
-// MONITOR:
-// begin_monitor();
-// static routine_monitor();
-// static check_data();
-//
-// PHILO:
-// philo_routine;
-//
-// ??:
-// last_meal_time_ago();
-// philo_eaten_all_meal();
-// all_philos_finished();
-// philo_is_dead();
-// update_last_meal()?
 
 #endif

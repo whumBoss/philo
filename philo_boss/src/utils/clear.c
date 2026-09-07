@@ -1,5 +1,4 @@
 #include "../../header/header.h"
-#include <pthread.h>
 
 //		=== CLEAR === 
 // on clear tout soit wait les threads philos, destroy les mutex et free les philos

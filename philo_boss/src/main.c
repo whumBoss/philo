@@ -21,15 +21,13 @@ int	main(int ac, char **av)
 		return (1);
 	
 //		=== EXECUTION ===
-	// begin_monitor(); // le thread monitor est lancer sur sa routine et on le wait 
+	if (!begin_monitor(&data, philo)) // le thread monitor est lancer sur sa routine et on le wait 
+		return (1);
 
-
-	// on clear tout. Soit wait les threads philos, destroy les mutex et free les philos
+	clear_everything(philo); // on clear tout. Soit wait les threads philos, destroy les mutex et free les philos
 
 
 	// QUESTION : Les return value des threads on les recupere jamais? On est pas cense renvoyer un exit code different selon si les philos ont bien manger ou si un philo est dead? when, where, why?????
-	//
-	clear_everything(philo);
-
+	
 	return (0);
 }
