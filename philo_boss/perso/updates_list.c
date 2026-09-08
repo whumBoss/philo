@@ -72,3 +72,10 @@
 //	fonctions du monitor casi fini avec les utils du monitor aussi 
 //	prochaine etape : thinking et sleeping, verif toutes les fonctions dans lesquels j'ai des qst ou de commentaires et tester le prog
 //
+//	=== 08 sept mar ===
+//
+//	thinking et sleeping pseudo puis vrai code
+//	prochaine etape : tester, verif les sleep que je comprends pas, les leaks, les destroy et les joins,
+//	les msg a ecrire et le comportement du prog
+//
+//

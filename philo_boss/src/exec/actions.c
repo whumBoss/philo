@@ -99,23 +99,24 @@ int	thinking(t_philo *philo)
 {
 	t_data	*data;
 	data = philo->data;
-//	si on lis stop (donc c'est vrai quoi)
-//		return (0); // erreur!
-//	print action ""
-//	custom_sleep(data, time_to_sleep);
-//	return (1); // good!
-//}
+	if (read_value(&data->lock_end_prog, &data->end_prog))
+		return (0); // erreur!
+	print_action(philo, "is thinking");
+	custom_sleep(data, data->time_sleep);
+	return (1); // good!
+}
 
-//int	sleeping(le philo)
-//{
-//	recup data
-//	si on lis stop (donc c'est vrai quoi)
-//		return (0); // erreur!
-//	print action ""
+int	sleeping(t_philo *philo)
+{
+	t_data *data;
+	data = philo->data;
+	if (read_value(&data->lock_end_prog, &data->end_prog))
+		return (0); // erreur!
+	print_action(philo, "is sleeping");
 //	// why on sleep bizzarement???
-//	si nb_philo % 2 != 0 // si c'eat un nb impair de philo
-//		custom_sleep(data, 100);
-//	return (1); // good!
+	if (data->nb_philo % 2 != 0) // si c'eat un nb impair de philo
+		custom_sleep(data, 100);
+	return (1); // good!
 
-//}
+}
 
