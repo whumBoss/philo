@@ -16,7 +16,6 @@ int	philo_is_dead(t_philo *philo)
 int	philos_finished(t_philo *philo)
 {
 	t_data	*data;
-	int		must_eat;
 
 	data = philo->data;
 	return (data->philo_finish_eaten_count == data->nb_philo); // verif si nb_meal_per_philo est a -1, whyyyyyyyyyyyyy?????

@@ -28,4 +28,6 @@ void	print_philo(t_philo **philo)
 //		printf("right_fork = %p\n", philo[i]->right_fork);
 		i++;
 	}
+	printf("--------------------\n\n");
+
 }

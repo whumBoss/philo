@@ -1,14 +1,14 @@
 #include "../../header/header.h"
 
 //		=== MONITOR ===
-//le thread monitor est lancer sur sa routine et on le wait
+// le thread monitor est lancer sur sa routine et on le wait
 
+// met a jour les infos concernant la mort du philo ou la fin de tout les repas du philo, soit si ce philo est termine ou pas encore
 static void	check_philo(t_philo *philo)
 {
 	t_data	*data;
 
 	data = philo->data;
-	// met a jour les infos concernant la mort du philo ou la fin de tout les repas du philo, soit si ce philo est termine ou pas encore
 	if (last_meal_time_ago(philo) >= data->time_die)
 		update_value(&philo->death_lock, &philo->dead);
 	if (philo_eaten_all_meal(philo))
@@ -23,7 +23,7 @@ static void *routine_monitor(void *arg)
 
 	philo = (t_philo **)arg;
 	data = philo[0]->data;
-//	custom sleep monitor but whyyyyyyyyyyyyy?
+	custom_sleep(data, data->time_eat - 100); // => POURQUOI?
 	while (1)
 	{
 		i = 0; // on remet i a zero pour re-check tout les philo a chaque boucle
@@ -38,7 +38,7 @@ static void *routine_monitor(void *arg)
 			}
 			i++;
 		}
-//		sleep //=> whyyyyyyyyyyyyy?????
+		custom_sleep(data, 100); // => POURQUOI?
 		// si le flag stop est vrai, on stop la grande boucle, soit on termine le thread monitor, donc fin de programme
 		if (data->end_prog)
 			break; // => la grande boucle

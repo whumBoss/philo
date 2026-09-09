@@ -25,7 +25,7 @@ int	begin_philo(t_philo **philo)
 {
 	if (!init_philos_mutex(philo))
 		return (0);
-	//print_philo(philo);
+	print_philo(philo);
 	if (!get_philos_started(philo))
 		return (0);
 	return (1);
