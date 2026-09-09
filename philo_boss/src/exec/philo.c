@@ -24,3 +24,21 @@ void	*philo_routine(void *arg)
 	}
 	return (NULL); //=> tjrs pas de return value? en cas d'erreur?
 }
+
+int	get_philos_started(t_philo **philo)
+{
+	t_data	*data;
+	int	i;
+
+	i = 0;
+	data = philo[i]->data;
+	data->start_time = get_time_of_day();
+	while (i < data->nb_philo)
+	{
+		if (pthread_create(&philo[i]->philo, NULL, philo_routine, philo[i]) != 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+

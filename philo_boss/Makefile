@@ -25,7 +25,7 @@ UTILS_DIR = src/utils/
 MAIN_FILES = main.c
 PARSING_FILES = init_data.c init_philos.c
 EXEC_FILES = actions.c monitor.c philo.c
-UTILS_FILES = clear.c test.c utils_gen.c utils_value.c
+UTILS_FILES = clear.c test.c utils_gen.c utils_monitor.c utils_value.c
 
 # ===== Source / Object / Dependency Lists =====
 SRCS = \

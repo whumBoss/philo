@@ -19,6 +19,7 @@ static void	clear_philos(t_philo **philos)
 	while (i < data->nb_philo)
 	{
 		pthread_mutex_destroy(&philos[i]->lock_nb_meal_eaten);
+		pthread_mutex_destroy(&philos[i]->lock_last_meal_time);
 		pthread_mutex_destroy(&philos[i]->death_lock);
 		free(philos[i]);
 		i++;

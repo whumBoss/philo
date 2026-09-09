@@ -64,12 +64,13 @@ t_philo	**init_philo(t_data *data);
 
 // exec/philo.c 
 void	*philo_routine(void *arg);
+int	get_philos_started(t_philo **philo);
 
 // exec/actions.c
 int	print_action(t_philo *philo, char *str);
 int		eating(t_philo *philo);
-// sleeping();
-// thinking();
+int	thinking(t_philo *philo);
+int	sleeping(t_philo *philo);
 
 
 // exec/monitor.c
@@ -92,10 +93,10 @@ void	update_last_meal(t_philo *philo);
 long	read_last_meal(t_philo *philo);
 
 //	utils_monitor.c
-// last_meal_time_ago();
-// philo_eaten_all_meal();
-// philos_finished();
-// philo_is_dead();
+long	last_meal_time_ago(t_philo *philo);
+int		philo_eaten_all_meal(t_philo *philo);
+int		philos_finished(t_philo *philo);
+int		philo_is_dead(t_philo *philo);
 
 
 //	clear.c

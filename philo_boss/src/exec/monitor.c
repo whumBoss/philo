@@ -10,12 +10,12 @@ static void	check_philo(t_philo *philo)
 	data = philo->data;
 	// met a jour les infos concernant la mort du philo ou la fin de tout les repas du philo, soit si ce philo est termine ou pas encore
 	if (last_meal_time_ago(philo) >= data->time_die)
-		update_value(philo->death_lock, philo->dead)
+		update_value(&philo->death_lock, &philo->dead);
 	if (philo_eaten_all_meal(philo))
 		data->philo_finish_eaten_count++;
 }
 
-static void routine_monitor(void *arg)
+static void *routine_monitor(void *arg)
 {
 	t_philo	**philo;
 	t_data	*data;
@@ -31,9 +31,9 @@ static void routine_monitor(void *arg)
 		{
 			check_philo(philo[i]); //=> met a jour les valeur concernant les repas ou la mort du philo
 			// si le philo est mort ou ils ont tous fini de manger, on met le flag stop dans data et on sors de la petite boucle
- 			if (philo_is_dead(philo[i]) || philos_finished(philo[i], data->philo_finish_eaten_count))
+ 			if (philo_is_dead(philo[i]) || philos_finished(philo[i]))
 			{
-				update_value(data->lock_end_prog, data->end_prog);
+				update_value(&data->lock_end_prog, &data->end_prog);
 				break; // => la petite boucle
 			}
 			i++;
@@ -49,7 +49,7 @@ static void routine_monitor(void *arg)
 
 int	begin_monitor(t_data *data, t_philo **philo)
 {
-	if (pthread_create(&data->monitor, NULL, routine_monitor, **philo) != 0)
+	if (pthread_create(&data->monitor, NULL, routine_monitor, philo) != 0)
 		return (0);
 	pthread_join(data->monitor, NULL);
 	return (1);
