@@ -12,6 +12,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 
+//		Init data dans le main pour eviter de malloc
 	data.nb_philo = ft_atol(av[1]);
 	data.time_die = ft_atol(av[2]);
 	data.time_eat = ft_atol(av[3]);
@@ -25,18 +26,19 @@ int	main(int ac, char **av)
 	data.end_prog = 0;
 
 //		=== PARSING ===
-	if(!init_data(&data, av)) // les infos ont ete verifier et parser et les mutex initialiser
+	if(!init_data(&data, av)) // les infos ont ete verifier et les mutex initialiser
 		return (1);
 
 	philo = init_philo(&data); // les philos on ete malloc et assigner
-	if (!begin_philo(philo)) // les mutex on ete initialiser et les threads lancer sur leurs routines
+	if (!init_philos_mutex(philo)) // les mutex on ete initialiser et les threads lancer sur leurs routines
 		return (1);
+	print_philo(philo); // => TEST
 	
 //		=== EXECUTION ===
-	if (!begin_monitor(&data, philo)) // le thread monitor est lancer sur sa routine et on le wait 
+	if (!begin_threads(&data, philo)) // Lance le thread monitor est lance, et les philos aussi
 		return (1);
 
-	pthread_join(data.monitor, NULL);
+	pthread_join(data.monitor, NULL); // join monitor
 
 	clear_everything(philo); // on clear tout. Soit wait les threads philos, destroy les mutex et free les philos
 

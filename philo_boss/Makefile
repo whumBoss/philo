@@ -55,7 +55,7 @@ $(OBJ_DIR)/%.o: %.c
 
 # ===== Cleanup =====
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR) vgcore*
 #	@$(MAKE) clean -C $(LIBFT_DIR)
 #	@$(MAKE) clean -C $(PRINTF_DIR)
 

@@ -1,4 +1,5 @@
  #include "../../header/header.h"
+#include <stdio.h>
 
 //		=== ACTIONS ===
 
@@ -6,6 +7,7 @@ int	print_action(t_philo *philo, char *str)
 {
 	//assigner data dans data
 	t_data	*data;
+	long	current_time;
 	long	time;
 
 	data = philo->data;
@@ -15,7 +17,8 @@ int	print_action(t_philo *philo, char *str)
 		return (0);
 
 	//copier le time
-	time = get_time_of_day();
+	current_time = get_time_of_day();
+	time = current_time - data->start_time;
 
 	//ecrire
 	pthread_mutex_lock(&data->lock_print);
@@ -82,6 +85,7 @@ int	eating(t_philo *philo)
 
 	// update le nb de meal que le philo a manger
 	update_value(&philo->lock_nb_meal_eaten, &philo->nb_meal_eaten);
+	printf("philo %d nb meal eaten %d\n", philo->id, philo->nb_meal_eaten);
 
 
 	// custom sleep le temps du repas, pour rester lock durant tout ce temps
@@ -90,7 +94,7 @@ int	eating(t_philo *philo)
 	// unlock les fourchettes
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
-	print_action(philo, "unlock the fork"); // --> a suppr
+	print_action(philo, "unlock the forks"); // --> a suppr
 	
 	return (1);
 }

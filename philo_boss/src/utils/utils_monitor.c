@@ -1,4 +1,5 @@
 #include "../../header/header.h"
+#include <stdio.h>
 // 		=== UTILS_MONITOR ===
 
 
@@ -18,6 +19,7 @@ int	philos_finished(t_philo *philo)
 	t_data	*data;
 
 	data = philo->data;
+	// printf("passe dans philos_finished\n");
 	return (data->philo_finish_eaten_count == data->nb_philo); // verif si nb_meal_per_philo est a -1, whyyyyyyyyyyyyy?????
 }
 
@@ -27,6 +29,7 @@ int	philo_eaten_all_meal(t_philo *philo)
 	t_data *data;
 
 	data = philo->data;
+	// printf("passe dans philo_eaten_all_meal \n");
 	if (read_value(&philo->lock_nb_meal_eaten, &philo->nb_meal_eaten) == data->nb_meal_per_philo && !philo->finished_eaten)
 	{
 		philo->finished_eaten = 1;

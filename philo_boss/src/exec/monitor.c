@@ -1,4 +1,5 @@
 #include "../../header/header.h"
+#include <stdio.h>
 
 //		=== MONITOR ===
 // le thread monitor est lancer sur sa routine et on le wait
@@ -11,7 +12,7 @@ static void	check_philo(t_philo *philo)
 	data = philo->data;
 	if (last_meal_time_ago(philo) >= data->time_die && data->nb_philo > 1)
 		update_value(&philo->death_lock, &philo->dead);
-	printf("dead = %d\n", philo->dead);// TEST
+	// printf("dead = %d\n", philo->dead);// TEST
 	if (philo_eaten_all_meal(philo))
 		data->philo_finish_eaten_count++;
 }
@@ -25,7 +26,7 @@ static void *routine_monitor(void *arg)
 	philo = (t_philo **)arg;
 	data = philo[0]->data;
 
-	printf("1\n");
+	//printf("le monitor est lancer\n");
 	//custom_sleep(data, data->time_eat - 100); // => POURQUOI
 	while (1)
 	{
@@ -36,12 +37,13 @@ static void *routine_monitor(void *arg)
 			// si le philo est mort ou ils ont tous fini de manger, on met le flag stop dans data et on sors de la petite boucle
  			if (philo_is_dead(philo[i]) || philos_finished(philo[i]))
 			{
+				// printf("passe dans la condition\n");
 				update_value(&data->lock_end_prog, &data->end_prog);
 				break; // => la petite boucle
 			}
 			i++;
 		}
-		custom_sleep(data, 100); // => POURQUOI?
+		usleep(110); // => POURQUOI?
 		// si le flag stop est vrai, on stop la grande boucle, soit on termine le thread monitor, donc fin de programme
 		if (data->end_prog)
 			break; // => la grande boucle
@@ -50,7 +52,7 @@ static void *routine_monitor(void *arg)
 }
 
 
-int	begin_monitor(t_data *data, t_philo **philo)
+int	begin_threads(t_data *data, t_philo **philo)
 {
 	if (pthread_create(&data->monitor, NULL, routine_monitor, philo) != 0)
 		return (0);

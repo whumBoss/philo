@@ -57,24 +57,24 @@ typedef struct s_philo
 int		init_data(t_data *data, char **av);
 
 // parsing/init_philos.c
-int		begin_philo(t_philo **philo);
 t_philo	**init_philo(t_data *data);
+int	init_philos_mutex(t_philo **philo);
 
 // == EXEC == 
 
 // exec/philo.c 
 void	*philo_routine(void *arg);
-int	get_philos_started(t_philo **philo);
+int		get_philos_started(t_philo **philo);
 
 // exec/actions.c
-int	print_action(t_philo *philo, char *str);
+int		print_action(t_philo *philo, char *str);
 int		eating(t_philo *philo);
-int	thinking(t_philo *philo);
-int	sleeping(t_philo *philo);
+int		thinking(t_philo *philo);
+int		sleeping(t_philo *philo);
 
 
 // exec/monitor.c
-int	begin_monitor(t_data *data, t_philo **philo);
+int		begin_threads(t_data *data, t_philo **philo);
 // static routine_monitor();
 
 // == UTILS ==

@@ -1,6 +1,6 @@
 #include "../../header/header.h"
 
-static int	init_philos_mutex(t_philo **philo)
+int	init_philos_mutex(t_philo **philo)
 {
 	t_data	*data;
 	int		i;
@@ -21,13 +21,13 @@ static int	init_philos_mutex(t_philo **philo)
 	return (1);
 }
 
-int	begin_philo(t_philo **philo)
-{
-	if (!init_philos_mutex(philo))
-		return (0);
-	print_philo(philo);
-	return (1);
-}
+//int	begin_philo(t_philo **philo)
+//{
+//	if (!init_philos_mutex(philo))
+//		return (0);
+//	print_philo(philo);
+//	return (1);
+//}
 
 t_philo	**init_philo(t_data *data)
 {
