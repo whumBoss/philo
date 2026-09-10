@@ -19,7 +19,7 @@ void	*philo_routine(void *arg)
 	// Boucle infini pour faire manger, penser, dormir le philo. Si une des actions est fausse, break la boucle
 	while (1)
 	{
-		if (!eating(philo) /*|| !thinking(philo) || !sleeping(philo)*/)
+		if (!eating(philo) || !thinking(philo) || !sleeping(philo))
 			break;
 	}
 	return (NULL); //=> tjrs pas de return value? en cas d'erreur?

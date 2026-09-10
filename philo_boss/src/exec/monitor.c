@@ -9,8 +9,9 @@ static void	check_philo(t_philo *philo)
 	t_data	*data;
 
 	data = philo->data;
-	if (last_meal_time_ago(philo) >= data->time_die)
+	if (last_meal_time_ago(philo) >= data->time_die && data->nb_philo > 1)
 		update_value(&philo->death_lock, &philo->dead);
+	printf("dead = %d\n", philo->dead);// TEST
 	if (philo_eaten_all_meal(philo))
 		data->philo_finish_eaten_count++;
 }
@@ -23,7 +24,9 @@ static void *routine_monitor(void *arg)
 
 	philo = (t_philo **)arg;
 	data = philo[0]->data;
-	custom_sleep(data, data->time_eat - 100); // => POURQUOI?
+
+	printf("1\n");
+	//custom_sleep(data, data->time_eat - 100); // => POURQUOI
 	while (1)
 	{
 		i = 0; // on remet i a zero pour re-check tout les philo a chaque boucle
@@ -51,7 +54,8 @@ int	begin_monitor(t_data *data, t_philo **philo)
 {
 	if (pthread_create(&data->monitor, NULL, routine_monitor, philo) != 0)
 		return (0);
-	pthread_join(data->monitor, NULL);
+	if (!get_philos_started(philo))
+		return (0);
 	return (1);
 }
 

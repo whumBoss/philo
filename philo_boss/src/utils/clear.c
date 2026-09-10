@@ -21,7 +21,8 @@ static void	clear_philos(t_philo **philos)
 		pthread_mutex_destroy(&philos[i]->lock_nb_meal_eaten);
 		pthread_mutex_destroy(&philos[i]->lock_last_meal_time);
 		pthread_mutex_destroy(&philos[i]->death_lock);
-		free(philos[i]);
+		if (philos[i])
+			free(philos[i]);
 		i++;
 	}
 	free(philos);
@@ -43,8 +44,8 @@ static void	clear_data(t_data *data)
 
 int	clear_everything(t_philo **philos)
 {
-	clear_philos(philos); // if??
 	clear_data(philos[0]->data); // if??
+	clear_philos(philos); // if??
 	return (1); //ou exit (?)
 }
 

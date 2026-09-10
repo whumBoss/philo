@@ -26,8 +26,6 @@ int	begin_philo(t_philo **philo)
 	if (!init_philos_mutex(philo))
 		return (0);
 	print_philo(philo);
-	if (!get_philos_started(philo))
-		return (0);
 	return (1);
 }
 
@@ -45,6 +43,10 @@ t_philo	**init_philo(t_data *data)
 		philo[i] = malloc(sizeof(t_philo));
 		if (!philo[i])
 			return (NULL);
+		// printf("malloc philo %ld,      %ld\n", sizeof(t_data), sizeof(t_data *) );
+		// philo[i]->data = malloc(sizeof(t_data *));
+		// if (!philo[i]->data)
+		// 	return NULL;
 		philo[i]->data = data;
 		philo[i]->id = i + 1;
 		philo[i]->nb_meal_eaten = 0;

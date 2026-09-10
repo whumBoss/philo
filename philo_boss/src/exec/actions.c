@@ -44,6 +44,7 @@ static int	taking_forks(t_philo *philo)
 		custom_sleep(data, data->time_die);
 		philo->dead = 1; // Pour indiquer qu'il est mort
 		pthread_mutex_unlock(philo->right_fork);
+		printf("pas de 2e fourchette\n");
 		return(0);
 		// QUESTION : donc il a pas reussis a manger, il a attendus le temps de mourrir, quand est ce qu'il meurs pour de vrai??
 	}

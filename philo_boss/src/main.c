@@ -12,6 +12,18 @@ int	main(int ac, char **av)
 		return (1);
 	}
 
+	data.nb_philo = ft_atol(av[1]);
+	data.time_die = ft_atol(av[2]);
+	data.time_eat = ft_atol(av[3]);
+	data.time_sleep = ft_atol(av[4]);
+	if (av[5])
+		data.nb_meal_per_philo = ft_atoi(av[5]);
+	else
+		data.nb_meal_per_philo = -1;
+	data.start_time = 0;
+	data.philo_finish_eaten_count = 0;
+	data.end_prog = 0;
+
 //		=== PARSING ===
 	if(!init_data(&data, av)) // les infos ont ete verifier et parser et les mutex initialiser
 		return (1);
@@ -23,6 +35,8 @@ int	main(int ac, char **av)
 //		=== EXECUTION ===
 	if (!begin_monitor(&data, philo)) // le thread monitor est lancer sur sa routine et on le wait 
 		return (1);
+
+	pthread_join(data.monitor, NULL);
 
 	clear_everything(philo); // on clear tout. Soit wait les threads philos, destroy les mutex et free les philos
 
