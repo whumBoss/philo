@@ -54,6 +54,7 @@ static void *routine_monitor(void *arg)
 
 int	begin_threads(t_data *data, t_philo **philo)
 {
+	data->start_time = get_time_of_day();
 	if (pthread_create(&data->monitor, NULL, routine_monitor, philo) != 0)
 		return (0);
 	if (!get_philos_started(philo))

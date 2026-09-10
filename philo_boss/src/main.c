@@ -1,5 +1,17 @@
 #include "../header/header.h"
 
+static int	is_only_digit(char *str) {
+	int i;
+
+	i =0;
+	while (str[i]) {
+		if (str[i] < '0' || str[i] > '9')
+			return 0;
+		i++;
+	}
+	return 1;
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -13,12 +25,26 @@ int	main(int ac, char **av)
 	}
 
 //		Init data dans le main pour eviter de malloc
+	if (!is_only_digit(av[1]) || !is_only_digit(av[2]) || !is_only_digit(av[3]) || !is_only_digit(av[4]))
+	{
+		write(2, INPUT_ERROR, ft_strlen(INPUT_ERROR));
+		return (1);
+	}
 	data.nb_philo = ft_atol(av[1]);
 	data.time_die = ft_atol(av[2]);
 	data.time_eat = ft_atol(av[3]);
 	data.time_sleep = ft_atol(av[4]);
+
 	if (av[5])
-		data.nb_meal_per_philo = ft_atoi(av[5]);
+	{
+		if (is_only_digit(av[5]))
+			data.nb_meal_per_philo = ft_atoi(av[5]);
+		else
+		{
+			write(2, INPUT_ERROR, ft_strlen(INPUT_ERROR));
+			return (1);
+		}
+	}
 	else
 		data.nb_meal_per_philo = -1;
 	data.start_time = 0;
@@ -39,6 +65,8 @@ int	main(int ac, char **av)
 		return (1);
 
 	pthread_join(data.monitor, NULL); // join monitor
+	
+	print_philo(philo);
 
 	clear_everything(philo); // on clear tout. Soit wait les threads philos, destroy les mutex et free les philos
 

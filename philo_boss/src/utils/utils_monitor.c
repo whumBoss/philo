@@ -1,5 +1,4 @@
 #include "../../header/header.h"
-#include <stdio.h>
 // 		=== UTILS_MONITOR ===
 
 

@@ -1,4 +1,5 @@
  #include "../../header/header.h"
+#include <pthread.h>
 #include <stdio.h>
 
 //		=== ACTIONS ===
@@ -36,25 +37,44 @@ static int	taking_forks(t_philo *philo)
 
 	data = philo->data;
 	
-	// prendre la fourchette de droite et ecrire l'action
-	pthread_mutex_lock(philo->right_fork);
-	print_action(philo, "has taken a fork");
+	// prendre la fourchette : de droite si c'est un id impair => r (rllr)
+	if (philo->id % 2 != 0)
+	{
+		pthread_mutex_lock(philo->right_fork);
+		print_action(philo, "has taken a fork");
+	}
+	else // de gauche si c'est un id pair => l (lrrl)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_action(philo, "has taken a fork");
+	}
 
 	// 1 cas speciale
 	// il y a un philo et il a pas de fourchette a gauche
 	if (!philo->left_fork && data->nb_philo == 1 )
 	{
 		custom_sleep(data, data->time_die);
+		pthread_mutex_lock(&philo->death_lock);
 		philo->dead = 1; // Pour indiquer qu'il est mort
+		pthread_mutex_unlock(&philo->death_lock);
 		pthread_mutex_unlock(philo->right_fork);
-		printf("pas de 2e fourchette\n");
+		// printf("pas de 2e fourchette\n"); // --> TEST
 		return(0);
 		// QUESTION : donc il a pas reussis a manger, il a attendus le temps de mourrir, quand est ce qu'il meurs pour de vrai??
 	}
 	
-	//prendre la fourchette de gauche et ecrire
-	pthread_mutex_lock(philo->left_fork);
-	print_action(philo, "has taken a fork");
+	// prendre la fourchette : de gauche si c'est un id impair => l (rllr)
+	if (philo->id % 2 != 0) 
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_action(philo, "has taken a fork");
+	}
+	else // de gauche si c'est un id pair => r (lrrl)
+	{
+		pthread_mutex_lock(philo->right_fork);
+		print_action(philo, "has taken a fork");
+
+	}
 	return (1);
 	// les fourchettes on bien ete prises
 	
@@ -85,17 +105,25 @@ int	eating(t_philo *philo)
 
 	// update le nb de meal que le philo a manger
 	update_value(&philo->lock_nb_meal_eaten, &philo->nb_meal_eaten);
-	printf("philo %d nb meal eaten %d\n", philo->id, philo->nb_meal_eaten);
+	//printf("philo %d nb meal eaten %d\n", philo->id, philo->nb_meal_eaten);
 
 
 	// custom sleep le temps du repas, pour rester lock durant tout ce temps
 	custom_sleep(data, data->time_eat);
 
-	// unlock les fourchettes
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
-	print_action(philo, "unlock the forks"); // --> a suppr
-	
+	// unlock les fourchettes :
+	if (philo->id % 2 != 0) // si c'est un id impair (rllr)
+	{
+		pthread_mutex_unlock(philo->left_fork); // => l
+		pthread_mutex_unlock(philo->right_fork); // => r
+		//print_action(philo, "unlock the forks"); // --> TEST
+	}
+	else // si c'est un id pair (lrrl)
+	{
+		pthread_mutex_unlock(philo->right_fork); // => r
+		pthread_mutex_unlock(philo->left_fork); // => l
+		//print_action(philo, "unlock the forks"); // --> TEST
+	}
 	return (1);
 }
 
