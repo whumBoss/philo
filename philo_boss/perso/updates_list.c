@@ -78,4 +78,25 @@
 //	prochaine etape : tester, verif les sleep que je comprends pas, les leaks, les destroy et les joins,
 //	les msg a ecrire et le comportement du prog
 //
+// === mer et jeu ==
+// fin du code debut des testssss
+// reste a faire : la norme
 //
+// === lun 14 sept ===
+//
+// norme + verif int max + clear manquant
+// reste a faire : 
+// - debuger le segfault
+// - separer le main en plusieur fonction
+// - verif norme
+// - re faire touttt les test 
+//
+// liste de test : 
+// - peu d'arg
+// - trop d'arg
+// - arg lettre
+// - arg negatif
+// - arg < int max
+// - nb_philo > 200
+// 
+// tout les test de la correction avec valgrind puis helgrind 

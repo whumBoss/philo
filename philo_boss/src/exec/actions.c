@@ -1,6 +1,4 @@
  #include "../../header/header.h"
-#include <pthread.h>
-#include <stdio.h>
 
 //		=== ACTIONS ===
 

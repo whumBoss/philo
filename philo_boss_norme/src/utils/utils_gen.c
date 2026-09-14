@@ -1,0 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_gen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wihumeau <wihumeau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/14 15:26:17 by wihumeau          #+#    #+#             */
+/*   Updated: 2026/09/14 15:26:18 by wihumeau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../header/header.h"
+
+void	custom_sleep(t_data *data, size_t sleep_time)
+{
+	size_t	time;
+
+	time = get_time_of_day();
+	while ((get_time_of_day() - time) < sleep_time
+		&& !read_value(&data->lock_end_prog, &data->end_prog))
+		usleep(100);
+	return ;
+}
+
+long	get_time_of_day(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+int	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+long	ft_atol(const char *nptr)
+{
+	long	result;
+	int		sign;
+	int		i;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((nptr[i] == ' ') || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = result * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (result * sign);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	signe;
+	int	nb;
+
+	i = 0;
+	signe = 1;
+	nb = 0;
+	while ((str[i] == ' ') || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			signe = -signe;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + (str[i] - 48);
+		i++;
+	}
+	return (nb * signe);
+}

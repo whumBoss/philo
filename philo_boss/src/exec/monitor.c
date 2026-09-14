@@ -1,5 +1,4 @@
 #include "../../header/header.h"
-#include <stdio.h>
 
 //		=== MONITOR ===
 // le thread monitor est lancer sur sa routine et on le wait
