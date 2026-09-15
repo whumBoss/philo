@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
 
 static void	check_philo(t_philo *philo)
 {

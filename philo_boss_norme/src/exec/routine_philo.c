@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
 
 void	*philo_routine(void *arg)
 {

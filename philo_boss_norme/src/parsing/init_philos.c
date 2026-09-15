@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
 
 int	init_philos_mutex(t_philo **philo)
 {
@@ -41,11 +41,8 @@ int	init_philos_mutex(t_philo **philo)
 	return (1);
 }
 
-static void	init_philo(t_philo *philo, int i)
+static void	init_philo(t_data *data, t_philo *philo, int i)
 {
-	t_data	*data;
-
-	data = philo->data;
 	philo->data = data;
 	philo->id = i + 1;
 	philo->nb_meal_eaten = 0;
@@ -88,7 +85,7 @@ t_philo	**init_philos(t_data *data)
 			malloc_error(data, philo);
 			return (NULL);
 		}
-		init_philo(philo[i], i);
+		init_philo(data, philo[i], i);
 		i++;
 	}
 	return (philo);

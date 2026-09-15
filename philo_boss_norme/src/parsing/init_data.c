@@ -10,7 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
+
+static void	failed_data_mutex(t_data *data)
+{
+	clear_forks_mutex(data);
+	pthread_mutex_destroy(&data->lock_print);
+	write(2, PHILO_MUTEX_ERROR, ft_strlen(PHILO_MUTEX_ERROR));
+}
 
 static int	data_mutex(t_data *data)
 {
@@ -20,18 +27,21 @@ static int	data_mutex(t_data *data)
 	while (i < data->nb_philo)
 	{
 		if (pthread_mutex_init(&data->lock_forks[i], NULL) != 0)
+		{
+			write(2, PHILO_MUTEX_ERROR, ft_strlen(PHILO_MUTEX_ERROR));
 			return (0);
+		}
 		i++;
 	}
 	if (pthread_mutex_init(&data->lock_print, NULL) != 0)
 	{
 		clear_forks_mutex(data);
+		write(2, PHILO_MUTEX_ERROR, ft_strlen(PHILO_MUTEX_ERROR));
 		return (0);
 	}
 	if (pthread_mutex_init(&data->lock_end_prog, NULL) != 0)
 	{
-		clear_forks_mutex(data);
-		pthread_mutex_destroy(&data->lock_print);
+		failed_data_mutex(data);
 		return (0);
 	}
 	return (1);
@@ -40,8 +50,8 @@ static int	data_mutex(t_data *data)
 static int	values_validation(t_data data)
 {
 	return (data.nb_philo > 0 && data.nb_philo <= 200
-		&& data.time_die > 0 && data.time_eat > 0 && data.time_sleep > 0 
-		&& data.time_die < INT_MAX && data.time_eat < INT_MAX 
+		&& data.time_die > 0 && data.time_eat > 0 && data.time_sleep > 0
+		&& data.time_die < INT_MAX && data.time_eat < INT_MAX
 		&& data.time_sleep < INT_MAX);
 }
 

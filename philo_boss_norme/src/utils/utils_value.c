@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
 
 void	update_value(pthread_mutex_t *mutex, int *value)
 {

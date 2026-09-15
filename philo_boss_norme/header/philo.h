@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -47,7 +46,7 @@ typedef struct s_data
 	int				philo_finish_eaten_count;
 	int				end_prog;
 
-} t_data;
+}	t_data;
 
 typedef struct s_philo
 {
@@ -63,10 +62,9 @@ typedef struct s_philo
 	pthread_mutex_t	lock_nb_meal_eaten;
 	pthread_mutex_t	lock_last_meal_time;
 	pthread_mutex_t	death_lock;
-} t_philo;
+}	t_philo;
 
 // === FONCTIONS ===
-
 
 // == PARSING ==
 
@@ -75,8 +73,7 @@ int		init_data(t_data *data, char **av);
 
 // parsing/init_philos.c
 t_philo	**init_philos(t_data *data);
-int	init_philos_mutex(t_philo **philo);
-
+int		init_philos_mutex(t_philo **philo);
 
 // == EXEC == 
 
@@ -91,7 +88,6 @@ int		sleeping(t_philo *philo);
 
 // exec/monitor.c
 int		begin_threads(t_data *data, t_philo **philo);
-
 
 // == UTILS ==
 
@@ -124,8 +120,6 @@ int		clear_everything(t_philo **philos);
 void	clear_philos(t_philo **philos, int nb);
 void	clear_nb_philos(t_philo **philos, int nb);
 void	clear_philo_mutex_fail(t_philo **philo, int i, int flag);
-
-
 
 //	test.c
 void	print_data(t_data data);

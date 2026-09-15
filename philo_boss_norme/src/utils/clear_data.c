@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
 
 void	clear_forks_mutex(t_data *data)
 {
@@ -38,9 +38,7 @@ int	clear_everything(t_philo **philos)
 	t_data	*data;
 
 	data = philos[0]->data;
-	clear_data(data);
 	clear_philos(philos, data->nb_philo);
-	write(2, PHILO_MUTEX_ERROR, ft_strlen(PHILO_MUTEX_ERROR));
+	clear_data(data);
 	return (1);
 }
-

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "philo.h"
 
 void	print_data(t_data data)
 {
@@ -48,8 +48,10 @@ void	print_philo(t_philo **philo)
 		printf("philo[%d]->dead = %d\n", philo[i]->id, philo[i]->dead);
 		printf("philo[%d]->last_meal_time = %ld\n\n", philo[i]->id,
 			philo[i]->last_meal_time);
-		printf("philo[%d]->right_fork = %p\n", philo[i]->id, philo[i]->right_fork);
-		printf("philo[%d]->left_fork = %p\n", philo[i]->id, philo[i]->left_fork);
+		printf("philo[%d]->right_fork = %p\n",
+			philo[i]->id, philo[i]->right_fork);
+		printf("philo[%d]->left_fork = %p\n",
+			philo[i]->id, philo[i]->left_fork);
 		i++;
 	}
 	printf("--------------------\n\n");

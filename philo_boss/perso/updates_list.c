@@ -101,3 +101,13 @@
 // - nb_philo > 200
 // 
 // tout les test de la correction avec valgrind puis helgrind 
+//
+//  === mar 15 sept ===
+//
+//  fait : norm, debug segfault et leak mutex
+//
+//  a faire :
+//  debug test ./philo 7 400 200 200 10
+//  le prog ne dois plus rien ecrire si un philo est die
+//
+

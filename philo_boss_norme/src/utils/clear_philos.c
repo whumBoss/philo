@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/header.h"
+#include "philo.h"
 
 void	clear_philos(t_philo **philos, int nb)
 {
@@ -73,6 +73,6 @@ void	clear_philo_mutex_fail(t_philo **philo, int i, int flag)
 	}
 	clear_data(data);
 	clear_nb_philos(philo, i);
+	write(2, PHILO_MUTEX_ERROR, ft_strlen(PHILO_MUTEX_ERROR));
 	return ;
 }
-

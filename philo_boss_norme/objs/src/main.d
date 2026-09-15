@@ -1,2 +1,2 @@
-objs/src/main.o: src/main.c src/../header/header.h
-src/../header/header.h:
+objs/src/main.o: src/main.c header/philo.h
+header/philo.h:
