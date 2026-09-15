@@ -83,8 +83,9 @@
 // reste a faire : la norme
 //
 // === lun 14 sept ===
-//
-// norme + verif int max + clear manquant
+// 
+// fait aujd: norme + verif int max + clear manquant
+// 
 // reste a faire : 
 // - debuger le segfault
 // - separer le main en plusieur fonction
