@@ -109,7 +109,7 @@ long	last_meal_time_ago(t_philo *philo);
 int		philo_eaten_all_meal(t_philo *philo);
 int		philos_finished(t_philo *philo);
 int		philo_is_dead(t_philo *philo);
-int		print_action(t_philo *philo, char *str);
+int		print_action(t_philo *philo, char *str, int flag);
 
 //	clear_data.c
 void	clear_forks_mutex(t_data *data);

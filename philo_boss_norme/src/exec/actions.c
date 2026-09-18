@@ -17,12 +17,12 @@ static int	taking_scd_fork(t_philo *philo)
 	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		print_action(philo, "has taken a fork");
+		print_action(philo, "has taken a fork", 0);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->right_fork);
-		print_action(philo, "has taken a fork");
+		print_action(philo, "has taken a fork", 0);
 	}
 	return (1);
 }
@@ -35,12 +35,12 @@ static int	taking_forks(t_philo *philo)
 	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
-		print_action(philo, "has taken a fork");
+		print_action(philo, "has taken a fork", 0);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->left_fork);
-		print_action(philo, "has taken a fork");
+		print_action(philo, "has taken a fork", 0);
 	}
 	if (!philo->left_fork && data->nb_philo == 1)
 	{
@@ -64,7 +64,7 @@ int	eating(t_philo *philo)
 		return (0);
 	if (!taking_forks(philo))
 		return (0);
-	print_action(philo, "is eating");
+	print_action(philo, "is eating", 0);
 	update_last_meal(philo);
 	update_value(&philo->lock_nb_meal_eaten, &philo->nb_meal_eaten);
 	custom_sleep(data, data->time_eat);
@@ -88,7 +88,7 @@ int	thinking(t_philo *philo)
 	data = philo->data;
 	if (read_value(&data->lock_end_prog, &data->end_prog))
 		return (0);
-	print_action(philo, "is thinking");
+	print_action(philo, "is thinking", 0);
 	custom_sleep(data, data->time_sleep);
 	return (1);
 }
@@ -100,7 +100,7 @@ int	sleeping(t_philo *philo)
 	data = philo->data;
 	if (read_value(&data->lock_end_prog, &data->end_prog))
 		return (0);
-	print_action(philo, "is sleeping");
+	print_action(philo, "is sleeping", 0);
 	if (data->nb_philo % 2 != 0)
 		custom_sleep(data, 100);
 	return (1);
