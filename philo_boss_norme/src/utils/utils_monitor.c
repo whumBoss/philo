@@ -14,9 +14,13 @@
 
 int	philo_is_dead(t_philo *philo)
 {
+	//t_data	*data;
+
+	//data = philo->data;
 	if (read_value(&philo->death_lock, &philo->dead))
 	{
 		print_action(philo, "died");
+		//update_value(&data->lock_end_prog, &data->end_prog);
 		return (1);
 	}
 	return (0);
@@ -27,7 +31,12 @@ int	philos_finished(t_philo *philo)
 	t_data	*data;
 
 	data = philo->data;
-	return (data->philo_finish_eaten_count == data->nb_philo);
+	if (data->philo_finish_eaten_count == data->nb_philo)
+	{
+		update_value(&data->lock_end_prog, &data->end_prog);
+		return (1);
+	}
+	return (0);
 }
 
 int	philo_eaten_all_meal(t_philo *philo)
@@ -61,12 +70,18 @@ int	print_action(t_philo *philo, char *str)
 	long	time;
 
 	data = philo->data;
+	pthread_mutex_lock(&data->lock_print);
 	if (read_value(&data->lock_end_prog, &data->end_prog))
+	{
+		pthread_mutex_unlock(&data->lock_print);
 		return (0);
+	}
 	current_time = get_time_of_day();
 	time = current_time - data->start_time;
-	pthread_mutex_lock(&data->lock_print);
 	printf("%ld : philo %d %s\n", time, philo->id, str);
+	if (read_value(&philo->death_lock, &philo->dead))
+		//printf("%ld : philo %d %s\n", time, philo->id, "died");
+		update_value(&data->lock_end_prog, &data->end_prog);
 	pthread_mutex_unlock(&data->lock_print);
 	return (1);
 }

@@ -39,7 +39,7 @@ static void	*routine_monitor(void *arg)
 			check_philo(philo[i]);
 			if (philo_is_dead(philo[i]) || philos_finished(philo[i]))
 			{
-				update_value(&data->lock_end_prog, &data->end_prog);
+				//update_value(&data->lock_end_prog, &data->end_prog);
 				break ;
 			}
 			i++;

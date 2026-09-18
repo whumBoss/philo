@@ -109,5 +109,26 @@
 //  a faire :
 //  debug test ./philo 7 400 200 200 10
 //  le prog ne dois plus rien ecrire si un philo est die
+//	
+//	=== ven 18 sept ===
+//
+//	fait :
+//
+//	liste de test :
+//	valgrind --tool=helgrind --tool=drd ./philo
+//	eat and die : 1 800 200 200
+//	not die : 5 800 200 200
+//	not die, eat 7 : 5 800 200 200 7
+//	not die : 4 410 200 200
+//	die : 4 310 200 100
+//	die, time of death -10ms : 2 200 200 200
+//	other : 7 400 200 200 7
+//	other : 3 400 200 200 10
+//	other : 50 400 200 199
+//
+//
+//
+//	a faire :
+//
 //
 
